@@ -1,7 +1,14 @@
 package com.dd.springrest.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Course {
 	
+	@Id
+	@Column(name="COURSE_ID")
 	private long id;
 	private String name;
 	private String description;
