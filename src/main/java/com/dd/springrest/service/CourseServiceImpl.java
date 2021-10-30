@@ -1,6 +1,7 @@
 package com.dd.springrest.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -53,4 +54,39 @@ public class CourseServiceImpl implements CourseService {
 		return course;
 	}
 
+
+	@Override
+	public Course updateCourse(Course course) {
+		/**
+		 * Takes a course objects as input and replaces
+		 * the existing object with the new one
+		 */
+		boolean flag = false;
+		for(Course c:this.courses) {
+			if(c.getId()==course.getId())
+			{
+				c.setDescription(course.getDescription());
+				c.setName(course.getName());
+				flag = true;
+			}
+		}
+		return flag==true?course:null;
+	}
+
+
+	@Override
+	public void deleteCourse(long courseId) {
+		/**
+		 * Takes courseId as an argument and deletes
+		 * a course associated to that Id
+		 */
+		Course c;
+		Iterator<Course> iterator = this.courses.iterator();
+		while(iterator.hasNext()) {
+			c = iterator.next();
+			if(c.getId()==courseId) {
+				iterator.remove();
+			}
+		}	
+	}
 }
